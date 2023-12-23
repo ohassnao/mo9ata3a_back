@@ -21,6 +21,35 @@ public class Demande_inscri extends Demande{
 
     private String password;
 
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    private String ville;
+
+    public String getQuartier() {
+        return quartier;
+    }
+
+    public void setQuartier(String quartier) {
+        this.quartier = quartier;
+    }
+
+    public String getRue() {
+        return rue;
+    }
+
+    public void setRue(String rue) {
+        this.rue = rue;
+    }
+
+    private String quartier;
+    private String rue;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date")
     private Date date;

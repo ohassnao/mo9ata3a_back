@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class CitoyenServices {
@@ -17,7 +18,10 @@ public class CitoyenServices {
     public CitoyenServices(CitoyenRepo citoyenrepo){
         this.citoyenrepo = citoyenrepo;
     }
-
+    public Citoyen getCitoyenById(Long id) {
+        Optional<Citoyen> citoyenOptional = citoyenrepo.findById(id);
+        return citoyenOptional.orElse(null);
+    }
     public Citoyen saveCitoyen(Citoyen citoyen){
         return citoyenrepo.save(citoyen);
     }
