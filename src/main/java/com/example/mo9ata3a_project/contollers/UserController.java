@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
@@ -41,7 +42,13 @@ public class    UserController {
         return ResponseEntity.ok(savedUser);
     }
 
+    @GetMapping("/findbyid/{userId}")
+    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
+        Optional<User> user = userServices.findById(userId);
 
+        return user.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
 }
 

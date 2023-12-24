@@ -1,15 +1,15 @@
 package com.example.mo9ata3a_project.contollers;
 
 import com.example.mo9ata3a_project.entities.Demande_inscri;
+import com.example.mo9ata3a_project.entities.Demande_reclam;
+import com.example.mo9ata3a_project.entities.Email;
 import com.example.mo9ata3a_project.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(path="/email")
 @CrossOrigin("http://localhost:3000")
 
 public class AcceptanceController {
@@ -57,6 +57,40 @@ public class AcceptanceController {
 
         return ResponseEntity.ok("User refused and detailed email sent.");
     }
+    @PostMapping("/refuse-reclamation")
+    public ResponseEntity<String> refuseReclamation(@RequestBody Demande_reclam demandeReclam) {
+        // Logic to refuse the reclamation
+
+        // Send a detailed email to the refused user
+        String recipientEmail = demandeReclam.getCitoyen().getEmail();
+        String subject = "Your Reclamation in MO9ATA3A.ma has been denied";
+        String message = "Dear " + demandeReclam.getCitoyen().getPrenom() + " " + demandeReclam.getCitoyen().getNom() + ",\n" +
+                "We regret to inform you that your reclamation has been denied.\n" +
+                "Unfortunately, your application did not meet our current requirements. " +
+                "Please feel free to contact us for further information.\n" +
+                "Thank you for using our platform.";
+
+        emailService.sendEmail(recipientEmail, subject, message);
+
+        return ResponseEntity.ok("Reclamation denied, and detailed email sent.");
+    }
+
+
+    @PostMapping("/send-reclamation-response")
+    public ResponseEntity<String> sendReclamationResponse(
+            @RequestParam String to,
+            @RequestParam String subject,
+            @RequestParam String message
+    ) {
+        // Logic to send the response to the reclamation
+        emailService.sendEmail(to, subject, message);
+
+        return ResponseEntity.ok("Email sent in response to the reclamation.");
+    }
+
+
+
+
 
 
 }

@@ -24,4 +24,7 @@ public class Demande_reclamServices {
     public Demande_reclam saveDemandeReclam(Demande_reclam demandeReclam) {
         return demande_reclamrepo.save(demandeReclam);
     }
+    public void deleteDemandeReclamById(Long id) {
+        demande_reclamrepo.deleteById(id);
+    }
 }

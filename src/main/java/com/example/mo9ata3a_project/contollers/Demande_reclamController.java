@@ -29,7 +29,7 @@ public class Demande_reclamController {
         return ResponseEntity.ok(demandesReclam);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getById/{id}")
     public ResponseEntity<Demande_reclam> getDemandeReclamById(@PathVariable Long id) {
         Optional<Demande_reclam> demandeReclam = demandeReclamServices.getDemandeReclamById(id);
         return demandeReclam.map(ResponseEntity::ok)
@@ -40,5 +40,10 @@ public class Demande_reclamController {
     public ResponseEntity<Demande_reclam> createDemandeReclam(@RequestBody Demande_reclam demandeReclam) {
         Demande_reclam savedDemandeReclam = demandeReclamServices.saveDemandeReclam(demandeReclam);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedDemandeReclam);
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteDemandeReclamById(@PathVariable Long id) {
+        demandeReclamServices.deleteDemandeReclamById(id);
+        return ResponseEntity.ok("Demande_reclam with ID: " + id + " deleted successfully.");
     }
 }
