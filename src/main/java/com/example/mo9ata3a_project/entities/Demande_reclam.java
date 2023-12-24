@@ -4,6 +4,25 @@ import jakarta.persistence.*;
 
 @Entity
 public class Demande_reclam  extends Demande{
+    private String objet;
+    private String body;
+
+    public String getObjet() {
+        return objet;
+    }
+
+    public void setObjet(String objet) {
+        this.objet = objet;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
     @ManyToOne
     private Fonctionnaire_reclam fonc_reclam;
 
@@ -14,5 +33,6 @@ public class Demande_reclam  extends Demande{
     public void setFonc_reclam(Fonctionnaire_reclam fonc_reclam) {
         this.fonc_reclam = fonc_reclam;
     }
+
 
 }

@@ -33,7 +33,7 @@ public class CitoyenController {
         long count = citoyenservices.countCitoyens();
         return ResponseEntity.ok(count);
     }
-    @GetMapping("/cou   ntByQuartier")
+    @GetMapping("/countByQuartier")
     public ResponseEntity<List<Map<String, Object>>> getCitoyenCountByQuartier() {
         List<Map<String, Object>> counts = citoyenservices.getCitoyenCountByQuartier();
         return ResponseEntity.ok(counts);

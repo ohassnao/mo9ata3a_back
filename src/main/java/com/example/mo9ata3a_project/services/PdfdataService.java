@@ -67,4 +67,8 @@ public class PdfdataService {
     public Long countPdf(){
         return repository.count();
     }
+
+    public List<Pdfdata> getPdfdataByCitoyenId(Long idCitoyen) {
+        return repository.findById_citoyen(idCitoyen);
+    }
 }

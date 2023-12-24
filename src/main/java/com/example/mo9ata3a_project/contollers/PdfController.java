@@ -85,5 +85,10 @@ public class PdfController {
         long count = service.countPdf();
         return ResponseEntity.ok(count);
     }
+    @GetMapping("/allById/{idCitoyen}")
+    public ResponseEntity<List<Pdfdata>> getPdfdataByCitoyenId(@PathVariable Long idCitoyen) {
+        List<Pdfdata> pdfList = service.getPdfdataByCitoyenId(idCitoyen);
+        return ResponseEntity.ok(pdfList);
+    }
 
 }
